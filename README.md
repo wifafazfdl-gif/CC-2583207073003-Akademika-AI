@@ -1,1 +1,1 @@
-# CC-2583207073003-SistemInformasiSantri
+# CC-2583207073003-Akademika-AI
