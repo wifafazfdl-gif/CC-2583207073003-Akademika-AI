@@ -1,0 +1,82 @@
+ADR-0001-stack-deployment.md.
+  
+# ADR-0001: Pemilihan Stack dan Strategi Deployment Akademika AI
+
+## 1. Informasi Keputusan
+
+- **ID:** ADR-0001
+- **Judul:** Pemilihan Stack dan Strategi Deployment
+- **Status:** Proposed (usulan keputusan)
+- **Tanggal:** 9 November 2026
+- **Proyek:** Akademika AI
+- **Mata Kuliah:** Cloud Computing (PTI 2802)
+
+## 2. Konteks
+
+Akademika AI merupakan aplikasi berbasis web yang dikembangkan untuk mendukung kegiatan akademik dengan bantuan teknologi kecerdasan buatan. Sistem membutuhkan backend untuk menangani permintaan pengguna, mengelola proses aplikasi, dan menghubungkan fitur AI dengan layanan yang digunakan.
+
+Pengembangan dilakukan menggunakan infrastruktur Microsoft Azure for Students dengan VPS berbasis Ubuntu Server 24.04 LTS. Pemilihan teknologi perlu mempertimbangkan kapasitas server, kemudahan pengembangan, biaya operasional, keamanan, dan kemungkinan pengembangan sistem pada masa mendatang.
+
+## 3. Keputusan
+
+Arsitektur awal Akademika AI menggunakan pendekatan Infrastructure as a Service (IaaS) dengan VPS sebagai lingkungan deployment.
+
+Komponen teknologi yang dipilih:
+
+| Komponen | Teknologi |
+|---|---|
+| Infrastruktur cloud | Microsoft Azure for Students |
+| Model layanan cloud | IaaS (Virtual Private Server) |
+| Sistem operasi | Ubuntu Server 24.04 LTS |
+| Bahasa pemrograman backend | Python |
+| Framework backend | Flask |
+| Application server | Gunicorn |
+| Pengelolaan dependensi | Python requirements.txt |
+| Layanan AI | API AI eksternal (rencana integrasi) |
+| Database | Ditentukan berdasarkan kebutuhan penyimpanan aplikasi |
+
+## 4. Alasan Pemilihan
+
+1. VPS Azure memberikan kendali terhadap konfigurasi sistem operasi, jaringan, dan lingkungan deployment.
+2. Ubuntu Server 24.04 LTS menyediakan lingkungan server yang sesuai untuk menjalankan aplikasi Python.
+3. Flask dipilih karena ringan, fleksibel, dan sesuai untuk pengembangan aplikasi web dengan kebutuhan awal Akademika AI.
+4. Gunicorn digunakan sebagai application server untuk menjalankan aplikasi Flask pada lingkungan deployment.
+5. Pemanfaatan API AI eksternal direncanakan agar pemrosesan model AI tidak membebani sumber daya VPS.
+6. Azure for Students dapat dimanfaatkan untuk mendukung pengembangan dengan memperhatikan ketersediaan kredit dan batas penggunaan layanan.
+
+## 5. Alternatif yang Dipertimbangkan
+
+| Alternatif | Pertimbangan |
+|---|---|
+| PaaS (Platform as a Service) | Lebih sederhana dalam pengelolaan server, tetapi kontrol terhadap konfigurasi infrastruktur lebih terbatas. |
+| Managed service | Mengurangi beban pemeliharaan infrastruktur, tetapi perlu mempertimbangkan biaya layanan. |
+| IaaS (VPS Azure) | Memberikan kontrol lebih besar terhadap server, jaringan, dan proses deployment serta mendukung kebutuhan pembelajaran cloud computing. |
+
+## 6. Konsekuensi Keputusan
+
+### Keuntungan
+
+- Memiliki kontrol terhadap konfigurasi server.
+- Dapat mengatur lingkungan deployment sesuai kebutuhan aplikasi.
+- Mendukung pembelajaran pengelolaan infrastruktur cloud.
+- Dapat dikembangkan secara bertahap sesuai kebutuhan Akademika AI.
+
+### Risiko dan Kekurangan
+
+- Pemeliharaan sistem operasi dan pembaruan keamanan menjadi tanggung jawab pengembang.
+- Backup dan pemulihan data perlu direncanakan dan dijalankan secara berkala.
+- Penggunaan satu VPS menimbulkan risiko single point of failure.
+- Kapasitas server perlu diperhatikan agar aplikasi tidak mengalami kelebihan beban.
+- Penggunaan API AI eksternal dapat menimbulkan biaya tambahan dan ketergantungan pada penyedia layanan.
+
+## 7. Dampak terhadap Pengembangan Selanjutnya
+
+Arsitektur dirancang agar komponen aplikasi dan layanan AI dapat dikembangkan secara terpisah. Integrasi AI eksternal dapat ditambahkan melalui lapisan layanan pada backend sehingga penyedia AI dapat diganti tanpa harus membangun ulang seluruh aplikasi.
+
+Apabila jumlah pengguna dan kebutuhan sistem meningkat, infrastruktur dapat dikembangkan dengan mempertimbangkan peningkatan kapasitas VPS, penggunaan database yang lebih sesuai, dan pemisahan layanan aplikasi.
+
+## 8. Kesimpulan
+
+Pemilihan IaaS menggunakan VPS Microsoft Azure dengan Ubuntu Server 24.04 LTS, Python Flask, dan Gunicorn ditetapkan sebagai dasar arsitektur awal Akademika AI. Pendekatan ini dipilih karena memberikan fleksibilitas pengembangan, kontrol infrastruktur, dan kesesuaian dengan kebutuhan proyek pada tahap awal.
+
+Keputusan ini dapat dievaluasi kembali apabila kebutuhan pengguna, kapasitas sistem, dan kebutuhan layanan AI mengalami peningkatan.
